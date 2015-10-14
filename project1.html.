@@ -3,7 +3,7 @@
 
 String author=  "Kevin Schaefer";
 String title=  "PROJECT ONE";
-//String help=  " Click to relocate hero \n 'q' to Quit; 'r' to Reset. ";
+String help=  " Click to relocate hero \n 'q' to Quit; 'r' to Reset. ";
 
 int count= 0;
 
@@ -19,14 +19,18 @@ float sunX, sunY;
 void setup() {
   size( 640,480);
   horizon=  height/4;
+  reset();
+}
+
+void reset() {
   heroX=  width/2;
   heroY=  height/2;
   heroDX=  3;
   heroDY=  2;
   sunX= width*3/4;
   sunY= height/8;
-  goldX= heroX;
-  goldY= heroY;
+  goldX= random(0,width);
+  goldY= random(horizon,height);
   monsterX= heroX;
   monsterY= heroY;
 }
@@ -73,7 +77,7 @@ void scene() {
 
 void messages() {
   text( title, width/3, 20 );
-  //text( help, width*2/3, 30 );
+  text( help, width*2/3, 30 );
   text( author, 10,height-20 );
 }
 
@@ -161,7 +165,8 @@ void mousePressed() {
 }
 
 void keyPressed() {
-  if (key == 'q') {
+  if (key == 'q') 
     exit();                           // press 'q' key to QUIT.
-  }
+  if (key == 'r') 
+    reset();
 }
