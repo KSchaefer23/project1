@@ -9,29 +9,33 @@ int count= 0;
 
 //// GLOBALS:  coordinates, speed, etc.
 float horizon;
-float x, y;       // Position.
-float dx, dy;     // Speed.
+float heroX, heroY;       // Position.
+float heroDX, heroDY;     // Speed.
 float monsterX, monsterY;
+float goldX, goldY;
 float sunX, sunY;
 
 //// SETUP:  window size, initialization (start in middle of screen).
 void setup() {
   size( 640,480);
   horizon=  height/4;
-  x=  width/2;
-  y=  height/2;
-  dx=  3;
-  dy=  2;
+  heroX=  width/2;
+  heroY=  height/2;
+  heroDX=  3;
+  heroDY=  2;
   sunX= width*3/4;
   sunY= height/8;
-  monsterX= x;
-  monsterY= y;
+  goldX= heroX;
+  goldY= heroY;
+  monsterX= heroX;
+  monsterY= heroY;
 }
 
 //// NEXT FRAME:  scene, action, show.
 void draw() {
   count= count +1;  // same as count++; or count += 1;
   scene();
+  gold();
   hero();
   monster();
   messages();
@@ -74,33 +78,38 @@ void messages() {
 }
 
 //// ACTION:  move (x,y) coordinates of hero & monster; show them.
+void gold() {
+  fill(255,255,0);
+  ellipse(goldX,goldY, 20,20);
+}
+
 void hero() {
   fill(0,200,200);
-  rect(x-20,y, 70,10);                   // body
-  rect( x,y, 30,50 );        
-  ellipse(x+15, y-10, 20, 20);
+  rect(heroX-20,heroY, 70,10);                   // body
+  rect( heroX,heroY, 30,50 );        
+  ellipse(heroX+15, heroY-10, 20, 20);
   fill(255,255,255);
-  ellipse(x+10, y-12, 6, 6);             // eyes
-  ellipse(x+20, y-12, 6, 6);
+  ellipse(heroX+10, heroY-12, 6, 6);             // eyes
+  ellipse(heroX+20, heroY-12, 6, 6);
   fill(0,0,0);
-  ellipse(x+10, y-12, 2, 2);
-  ellipse(x+20, y-12, 2, 2);
+  ellipse(heroX+10, heroY-12, 2, 2);
+  ellipse(heroX+20, heroY-12, 2, 2);
   fill(255,0,0);
-  arc(x+15,y-7, 10,10, 0, PI, CHORD);    // smile
-  text( "Blue", x+3,y+20 );
+  arc(heroX+15,heroY-7, 10,10, 0, PI, CHORD);    // smile
+  text( "Blue", heroX+3,heroY+20 );
   
-  x = x + dx;                            // makes hero move away
-  if (x>width-20) { dx= -dx; }
-  if (x<1) { dx= -dx; }
-  y = y + dy;
-  if (y<horizon-20 || y>height-20) {
-    dy= -dy;
+  heroX = heroX + heroDX;                            // makes hero move away
+  if (heroX>width-20) { heroDX= -heroDX; }
+  if (heroX<1) { heroDX= -heroDX; }
+  heroY = heroY + heroDY;
+  if (heroY<horizon-20 || heroY>height-20) {
+    heroDY= -heroDY;
   }
 }
 
 void monster() {
-  monsterX=  monsterX - (monsterX-x)/30;
-  monsterY=  monsterY - (monsterY-y)/40;
+  monsterX=  monsterX - (monsterX-heroX)/30;
+  monsterY=  monsterY - (monsterY-heroY)/40;
   text( monsterX, 10, 10 );
   text( monsterY, 10, 20 );
   fill( 124,83,6 );
@@ -122,7 +131,7 @@ void monster() {
   
   ellipse(monsterX,monsterY, 40,20 );           // body
   
-  if(x<monsterX) {                          // FACE LEFT 
+  if(heroX<monsterX) {                          // FACE LEFT 
     ellipse(monsterX-20,monsterY-15, 20,20);    // head
     fill(0,0,0);
     ellipse(monsterX-24,monsterY-18, 2,2);      // eye
@@ -131,7 +140,7 @@ void monster() {
     ellipse(monsterX-14,monsterY-13, 11,20);    // ear
     line(monsterX+20,monsterY, monsterX+30,monsterY+10);// tail
   }
-  if(x>monsterX) { 
+  if(heroX>monsterX) { 
     ellipse(monsterX+20,monsterY-15, 20,20);    // head
     fill(0,0,0);
     ellipse(monsterX+24,monsterY-18, 2,2);      // eye
@@ -142,13 +151,13 @@ void monster() {
   }
 }
 
-//////// HANDLERS:  mouse clicks, keys
+// HANDLERS:  mouse clicks, keys
 void mousePressed() {
-  x=  mouseX;                             // Set (x,y) to mouse
-  y=  mouseY;
+  heroX=  mouseX;                             // Set (x,y) to mouse
+  heroY=  mouseY;
   //
-  dx=  random( -6, +6 );                  // random speed.
-  dy=  random( -4, +4 );
+  heroDX=  random( -6, +6 );                  // random speed.
+  heroDY=  random( -4, +4 );
 }
 
 void keyPressed() {
