@@ -23,16 +23,16 @@ void setup() {
 }
 
 void reset() {
-  heroX=  width/2;
-  heroY=  height/2;
+  heroX=  30;
+  heroY=  horizon-50;
   heroDX=  3;
   heroDY=  2;
   sunX= width*3/4;
   sunY= height/8;
   goldX= random(0,width);
-  goldY= random(horizon,height);
-  monsterX= heroX;
-  monsterY= heroY;
+  goldY= random(horizon+20,height);
+  monsterX= random(width/2,width);
+  monsterY= random(horizon,height);
 }
 
 //// NEXT FRAME:  scene, action, show.
@@ -106,7 +106,7 @@ void hero() {
   if (heroX>width-20) { heroDX= -heroDX; }
   if (heroX<1) { heroDX= -heroDX; }
   heroY = heroY + heroDY;
-  if (heroY<horizon-20 || heroY>height-20) {
+  if (heroY<horizon-50 || heroY>height-20) {
     heroDY= -heroDY;
   }
 }
