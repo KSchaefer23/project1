@@ -21,6 +21,8 @@ void setup() {
   size( 640,480);
   horizon=  height/4;
   score= 0;
+  sunX= width*3/4;
+  sunY= height/8;  
   reset();
 }
 
@@ -29,8 +31,6 @@ void reset() {
   heroY=  horizon-50;
   heroDX=  3;
   heroDY=  2;
-  sunX= width*3/4;
-  sunY= height/8;
   goldX= random(width*1/3,width*2/3);
   goldY= random(horizon+100,height*3/4);
   monsterX= random(width/2,width);
@@ -64,6 +64,20 @@ void scene() {
   triangle( 130,horizon-50, 150,horizon-70, 170,horizon-50  );  // top
   fill(204,102,0);
   rect(140, horizon-10, 20,10 );
+
+  fill(6,118,7);  
+  triangle( 210,horizon-10, 250,horizon-45, 290,horizon-10  );  // bottom
+  triangle( 220,horizon-30, 250,horizon-60, 280,horizon-30  );  // mid
+  triangle( 230,horizon-50, 250,horizon-70, 270,horizon-50  );  // top
+  fill(204,102,0);
+  rect(240, horizon-10, 20,10 );  
+  
+  fill(6,118,7);  
+  triangle( 140,horizon-10, 180,horizon-45, 220,horizon-10  );  // bottom
+  triangle( 150,horizon-30, 180,horizon-60, 210,horizon-30  );  // mid
+  triangle( 160,horizon-50, 180,horizon-70, 200,horizon-50  );  // top
+  fill(204,102,0);
+  rect(170, horizon-10, 20,10 );    
   
   rect(30,horizon-60, 60,60);                                          // house
   fill(245,245,245);
