@@ -104,10 +104,10 @@ void hero() {
   arc(heroX+15,heroY-7, 10,10, 0, PI, CHORD);    // smile
   text( "Blue", heroX+3,heroY+20 );
   
-  heroX=  heroX - (heroX-goldX)/80;
-  heroY=  heroY - (heroY-goldY)/90;
+  heroX=  heroX - ((heroX+15)-goldX) /40;
+  heroY=  heroY - ((heroY+15)-goldY) /50;
   
-  if ( dist( heroX+15,heroY+25, goldX,goldY) < 35 ) {  /// NEEDS DISTANCE FIX
+  if ( dist( heroX+15,heroY+15, goldX,goldY) < 15 ) {
   score += 50;
   reset();
   }
